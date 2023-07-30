@@ -1,0 +1,24 @@
+import openai
+
+# Replace 'YOUR_API_KEY' with your actual GPT-3 API key
+openai.api_key = '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'
+
+def chat_with_gpt3(prompt):
+    response = openai.Completion.create(
+        engine="text-davinci-002",  # You can experiment with different engines.
+        prompt=prompt,
+        max_tokens=150,             # Adjust the response length as needed.
+        stop=None                   # Stop parameter to end the conversation.
+    )
+    return response['choices'][0]['text'].strip()
+
+if __name__ == "__main__":
+    print("CHATGPT MR Hi, I'm ChatBot! Type 'bye' to exit.")
+    while True:
+        user_input = input("You: ")
+        if user_input.lower() == "bye":
+            print("CHATGPT MR : Goodbye!")
+            break
+        prompt = f"You: {user_input}\nChatBot:"
+        response = chat_with_gpt3(prompt)
+        print(response)
